@@ -11,9 +11,17 @@
         <h2>Welcome to ElasticMovie</h2>
         <form id="target" action="/" method="post">
           <div class="form-group">
-            <p><input id="search" type = "text" name = "query" placeholder="Search" autofocus></p>
+            <p><input id="search" type = "text" name = "query" placeholder="Search..." autofocus></p>
           </div>
         </form>
+        {% if western is defined %}
+          {% for doc in western['hits']['hits']: %}
+            <h2>{{ doc['_source']['title'] }}</h2>
+            <br>
+            <h4>{{ doc['_source']['plot'] }}</h4>
+            <hr>
+          {% endfor %}
+        {% endif %}
       </div>
     </div>
 
