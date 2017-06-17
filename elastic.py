@@ -26,10 +26,28 @@ def home():
         return render_template("home.html")
     if request.method == "POST":
         query = request.form["query"]
-        # Query with ElasticSearch and get first three items with best score{{ movie }}
-        movies = es.search(index='western', body={"query": {"fuzzy" : { "title" : query }}}, size=3)
+        # Query with ElasticSearch and get first three items with best score
+        movies = es.search(
+            index='western',
+            body={"query": {
+                    "multi_match": {
+                        "fields":  [ "title", "plot" ],
+                        "query": query,
+                        "fuzziness": "AUTO"
+                    }
+                },
+                "highlight": {
+                    "fields": {
+                        "title": {"number_of_fragments": 0},
+                        "plot": {"number_of_fragments": 0}
+                    }
+                }
+            },
+            size=3
+        )
         return render_template("home.html", western = movies)
 
 if __name__ == "__main__":
     app.run()
+    # Clear movie index from ElasticSearch
     es.indices.delete(index='western', ignore=[400, 404])

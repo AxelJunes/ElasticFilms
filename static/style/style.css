@@ -1,0 +1,57 @@
+html{
+  position: relative;
+  min-height: 100%;
+}
+
+body{
+  margin: 0 0 150px;
+}
+
+/*Emphasized text*/
+em {
+  font-style: normal;
+  text-shadow: 3px 2px yellow;
+}
+
+/*Navigation bar*/
+.navbar-search {
+  margin-top: 40px;
+}
+
+/*Footer*/
+.footer{
+  background-color: #fff;
+  width: 100%;
+  height: 150px;
+  position: absolute;
+  margin-bottom: 0;
+  left: 0;
+  bottom: 0;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  overflow:hidden;
+  border-radius: 0;
+}
+
+/*Front page logo*/
+.logo-main {
+  margin-top: 100px;
+}
+
+/*Navbar logo*/
+.logo-navbar {
+  height: 100px;
+  width : 100px;
+}
+
+@media (max-width: 768px) {
+  .logo-navbar {
+    height: 120px;
+    width : 100px;
+  }
+}
+
+/*Film search bar*/
+.search-bar, .search-icon {
+  height: 40px;
+}
