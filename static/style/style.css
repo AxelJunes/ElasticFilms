@@ -10,7 +10,7 @@ body{
 /*Emphasized text*/
 em {
   font-style: normal;
-  text-shadow: 3px 2px yellow;
+  background-color: #84d8e5;
 }
 
 /*Navigation bar*/
@@ -40,18 +40,19 @@ em {
 
 /*Navbar logo*/
 .logo-navbar {
-  height: 100px;
-  width : 100px;
+  height: 150px;
+  width : 300px;
 }
 
 @media (max-width: 768px) {
   .logo-navbar {
-    height: 120px;
-    width : 100px;
+    height: 100px;
+    width : 180px;
   }
 }
 
 /*Film search bar*/
 .search-bar, .search-icon {
   height: 40px;
+  margin-top: 45px;
 }

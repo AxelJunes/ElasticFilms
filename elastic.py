@@ -1,6 +1,6 @@
 # Libraries
 import pandas as pd
-from imdb import IMDb
+import json
 from elasticsearch import Elasticsearch
 from flask import Flask, render_template, request
 
@@ -27,7 +27,7 @@ def home():
     if request.method == "POST":
         query = request.form["query"]
         # Query with ElasticSearch and get first three items with best score
-        movies = es.search(
+        movies=es.search(
             index='western',
             body={"query": {
                     "multi_match": {
@@ -45,7 +45,8 @@ def home():
             },
             size=3
         )
-        return render_template("home.html", western = movies)
+
+        return render_template("home.html", western=movies)
 
 if __name__ == "__main__":
     app.run()

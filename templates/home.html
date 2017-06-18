@@ -2,36 +2,34 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Home</title>
     <!-- Stylesheets -->
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='style/style.css') }}">
-    <!-- Dynamic path for JQuery -->
-    <script type=text/javascript>
-      $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
-    </script>
   </head>
   <body>
     <div class="container">
-      {% if western is defined %}
-        <nav class="navbar">
+       <nav class="navbar">
           <div class="container-fluid">
             <div class="navbar-header">
-              <img class="img-responsive navbar-brand logo-navbar" src="{{ url_for('static',filename='img/Logo2.png') }}">
+              <img class="img-responsive navbar-brand logo-navbar" src="{{ url_for('static',filename='img/Logo.png') }}">
             </div>
             <div class="nav navbar-nav navbar-search col-lg-offset-4 col-lg-4">
               <form id="target" action="/" method="post">
                 <div class="input-group">
-                  <input class="form-control search-bar" type = "text" name = "query" placeholder="Search..." autofocus required>
+                  <input id="query" class="form-control search-bar" type = "text" name = "query" placeholder="Search..."
+                         value="{{ request.form['query'] }}" autofocus required>
                   <div class="input-group-btn">
-                    <button class="btn btn-default search-icon" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+                    <button id="submit-btn" class="btn btn-default search-icon" type="submit"><span class="glyphicon glyphicon-search"></span></button>
                   </div>
                 </div>
               </form>
             </div>
           </div>
-        </nav>
-        <hr>
+       </nav>
+      <hr>
+      {% if western is defined %}
         {% if western['hits']['total']>0: %}
           {% for doc in western['hits']['hits']: %}
               {% if doc['highlight']['title'] is defined: %}
@@ -54,7 +52,10 @@
           </div>
         {% endif %}
       {% else %}
-        <div class="row">
+        <div class="container">
+          <img class="img-responsive img-cinema" src="{{ url_for('static',filename='img/cinema.jpg') }}">
+        </div>
+        <!-- <div class="row">
           <img class="img-responsive col-lg-offset-4 col-lg-4 logo-main" src="{{ url_for('static',filename='img/Logo.png') }}">
         </div>
         <br><br>
@@ -62,14 +63,14 @@
           <div class="container-fluid col-lg-offset-4 col-lg-4">
             <form id="target" action="/" method="post">
               <div class="input-group">
-                <input class="form-control search-bar" type = "text" name = "query" placeholder="Search..." autofocus required>
+                <input id="query" class="form-control search-bar" type = "text" name = "query" placeholder="Search..." autofocus required>
                 <div class="input-group-btn">
                   <button class="btn btn-default search-icon" type="submit"><span class="glyphicon glyphicon-search"></span></button>
                 </div>
               </div>
             </form>
           </div>
-        </div>
+        </div> -->
       {% endif %}
       <!-- Footer -->
       <footer class="footer navbar">
@@ -89,4 +90,6 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script>window.jQuery || document.write('<script src="{{ url_for('static', filename='js/jquery.js') }}">\x3C/script>')</script>
+  <!-- AJAX -->
+  <script src="{{ url_for('static',filename='js/script.js') }}"></script>
 </html>
